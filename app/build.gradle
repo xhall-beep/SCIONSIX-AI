@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'ai.scionsix.orchestrator'
+    compileSdk 35
+    defaultConfig {
+        applicationId "ai.scionsix.orchestrator"
+        minSdk 35
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.13.0'
+}

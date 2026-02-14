@@ -1,0 +1,10 @@
+// Top-level build file for Android 16 (API 35)
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.3.0'
+    }
+}
