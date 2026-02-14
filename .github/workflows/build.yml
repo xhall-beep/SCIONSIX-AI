@@ -1,0 +1,45 @@
+name: SCIONSIX AI Build Pipeline
+
+on:
+  push:
+    branches: [ main, dev ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        api-level: 35  # Android 16
+        build-tools: "35.0.0"
+        
+    - name: Build APK
+      run: |
+        chmod +x ./gradlew
+        ./gradlew assembleDebug
+        
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: scionsix-debug
+        path: app/build/outputs/apk/debug/app-debug.apk
+        
+    - name: Create GitHub Release
+      if: github.ref == 'refs/heads/main'
+      uses: ncipollo/release-action@v1
+      with:
+        tag: v$(date +%Y.%m.%d)
+        name: SCIONSIX AI v$(date +%Y.%m.%d)
+        artifacts: "app/build/outputs/apk/debug/app-debug.apk"
+        token: ${{ secrets.GITHUB_TOKEN }}
