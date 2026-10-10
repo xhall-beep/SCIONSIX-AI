@@ -1,5 +1,8 @@
 name: SCIONSIX AI Build Pipeline
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [ main, dev ]
