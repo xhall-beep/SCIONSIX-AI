@@ -23,6 +23,7 @@ jobs:
       with:
         api-level: 35
         build-tools: "35.0.0"
+        packages: platform-tools
 
     - name: Build APK
       run: |
