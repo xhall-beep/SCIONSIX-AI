@@ -39,11 +39,15 @@ jobs:
         name: scionsix-debug
         path: app/build/outputs/apk/debug/app-debug.apk
 
+    - name: Set release tag
+      id: rel
+      run: echo "tag=v$(date +%Y.%m.%d)" >> "$GITHUB_OUTPUT"
+
     - name: Create GitHub Release
       if: github.ref == 'refs/heads/main'
       uses: ncipollo/release-action@v1
       with:
-        tag: v$(date +%Y.%m.%d)
-        name: SCIONSIX AI v$(date +%Y.%m.%d)
+        tag: ${{ steps.rel.outputs.tag }}
+        name: SCIONSIX AI ${{ steps.rel.outputs.tag }}
         artifacts: "app/build/outputs/apk/debug/app-debug.apk"
         token: ${{ secrets.GITHUB_TOKEN }}
