@@ -1,0 +1,10 @@
+$ python3 test_scion.py
+PASS: streamed execution (3 lines, in order, over time, exit 0) — spread=0.40s duration=0.61s
+PASS: failing command captures real exit + stderr — exit=2 stderr="ls: cannot access '/nonexistent-xyz-scion': No such file or directory"
+PASS: blocklist refuses >=3 patterns by name before execution — refused: rm-recursive-force, credential-file-access, download-pipe-to-shell, mkfs-filesystem-format, dd-to-raw-device, power-control
+PASS: blocked rm -rf left its target untouched
+PASS: bus round-trip (post -> claim -> execute -> done, result stored, chain INTACT) — task #1 result_id=2
+PASS: worker refuses a bus-injected blocked command (refusal is the stored result)
+PASS: no credential-shaped strings anywhere in the build dir — scan clean
+SUMMARY: 7/7 checks passed
+exit=0
